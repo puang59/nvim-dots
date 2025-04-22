@@ -14,22 +14,46 @@ return {
     },
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      require("lspconfig").lua_ls.setup { capabilites = capabilities }
+
+      require("lspconfig").lua_ls.setup { 
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            format = {
+              indent_size = 2,
+            },
+          },
+        },
+      }
+      require("lspconfig").ts_ls.setup { 
+        capabilities = capabilities,
+        settings = {
+          typescript = {
+            format = {
+              indentSize = 2,
+            },
+          },
+          javascript = {
+            format = {
+              indentSize = 2,
+            },
+          },
+        },
+      }
+      -- Add other language servers here if needed
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
-          local c = vim.lsp.get_client_by_id(args.data.client_id)
-          if not c then return end
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if not client then return end
 
-          if vim.bo.filetype == "lua" then
-            -- Format the current buffer on save
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = c.id })
-              end,
-            })
-          end
+          -- Format on save for all LSP-attached buffers
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = args.buf,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+            end,
+          })
         end,
       })
     end,
