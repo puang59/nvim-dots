@@ -15,7 +15,7 @@ return {
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      require("lspconfig").lua_ls.setup { 
+      require("lspconfig").lua_ls.setup {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -25,7 +25,7 @@ return {
           },
         },
       }
-      require("lspconfig").ts_ls.setup { 
+      require("lspconfig").ts_ls.setup {
         capabilities = capabilities,
         settings = {
           typescript = {
