@@ -46,26 +46,19 @@ return {
         end
       end
 
-      -- Python LSP configuration
-      require("lspconfig").pylsp.setup {
+      -- Python LSP configuration with pyright
+      require("lspconfig").pyright.setup {
         capabilities = capabilities,
         on_attach = custom_on_attach,
         settings = {
-          pylsp = {
-            plugins = {
-              pycodestyle = {
-                enabled = true,
-                maxLineLength = 88,
-              },
-              pyflakes = {
-                enabled = true,
-              },
-              black = {
-                enabled = true,
-              },
-            },
-          },
-        },
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "workspace",
+              useLibraryCodeForTypes = true
+            }
+          }
+        }
       }
 
       require("lspconfig").gopls.setup {
