@@ -38,3 +38,12 @@ if vim.g.neovide then
   vim.g.neovide_font_size = 14.0
   vim.g.neovide_line_height = 1.5
 end
+
+-- barbar.lua
+vim.keymap.set('n', '<leader>1', '<Cmd>BufferGoto 1<CR>', { desc = 'Go to buffer 1' })
+vim.keymap.set('n', '<leader>2', '<Cmd>BufferGoto 2<CR>', { desc = 'Go to buffer 2' })
+vim.keymap.set('n', '<leader>3', '<Cmd>BufferGoto 3<CR>', { desc = 'Go to buffer 3' })
+vim.keymap.set('n', '<leader>4', '<Cmd>BufferGoto 4<CR>', { desc = 'Go to buffer 4' })
+vim.keymap.set('n', '<leader>5', '<Cmd>BufferGoto 5<CR>', { desc = 'Go to buffer 5' })
+vim.keymap.set('n', '<leader>c', '<Cmd>BufferClose<CR>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>C', '<Cmd>BufferCloseAllButCurrent<CR>', { desc = 'Close all buffers except current' })
