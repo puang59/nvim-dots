@@ -24,21 +24,49 @@ return {
         },
       })
 
-      -- Diagnostic signs and virtual text
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      -- Diagnostic signs and virtual text with eye-catching indicators
+      local signs = { 
+        Error = "🔴", 
+        Warn = "⚠️", 
+        Hint = "💡", 
+        Info = "ℹ️" 
+      }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
       vim.diagnostic.config({
-        virtual_text = {
-          prefix = '●',
-          spacing = 2,
-        },
-        signs = true,
+        virtual_text = false,  -- Disable inline diagnostic text
+        signs = true,  -- Keep the gutter signs to show there's an issue
         underline = true,
         update_in_insert = false,
+        severity_sort = true,
+        float = {
+          focusable = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+          max_width = 80,
+        },
       })
+
+      -- Function to toggle diagnostic location list
+      local function toggle_diagnostic_list()
+        local loclist = vim.fn.getloclist(0)
+        if #loclist > 0 and vim.fn.getloclist(0, {winid = 0}).winid ~= 0 then
+          -- Location list is open, close it
+          vim.cmd('lclose')
+        else
+          -- Location list is closed or empty, open it with diagnostics
+          vim.diagnostic.setloclist()
+        end
+      end
+
+      -- Keymap to show diagnostics for current line
+      vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show line diagnostics' })
+      vim.keymap.set('n', '<leader>D', toggle_diagnostic_list, { desc = 'Toggle all diagnostics list' })
 
       local function custom_on_attach(client, bufnr)
         if client.server_capabilities.documentSymbolProvider then
