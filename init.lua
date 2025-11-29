@@ -6,11 +6,17 @@ vim.opt.fillchars = { eob = ' ' }
 
 -- Add these lines for global settings
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
-vim.keymap.set('n', 'grn', vim.lsp.buf.rename)
-vim.keymap.set('n', 'gra', vim.lsp.buf.code_action)
-vim.keymap.set('n', 'grr', vim.lsp.buf.references)
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find buffers' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Help tags' })
+
+vim.keymap.set('n', 'grn', vim.lsp.buf.rename)      -- Rename any variable or word
+vim.keymap.set('n', 'gra', vim.lsp.buf.code_action) -- Go to code actions (like quick fixes)
+vim.keymap.set('n', 'grr', vim.lsp.buf.references)  -- Go to references
+vim.keymap.set('n', 'gdd', vim.lsp.buf.definition)  -- Go to definition
 
 vim.keymap.set('n', '<space>e', '<cmd>Oil<CR>')
 vim.keymap.set('n', '<leader>ot', '<cmd>Floaterminal<cr>')
@@ -47,3 +53,9 @@ vim.keymap.set('n', '<leader>4', '<Cmd>BufferGoto 4<CR>', { desc = 'Go to buffer
 vim.keymap.set('n', '<leader>5', '<Cmd>BufferGoto 5<CR>', { desc = 'Go to buffer 5' })
 vim.keymap.set('n', '<leader>c', '<Cmd>BufferClose<CR>', { desc = 'Close current buffer' })
 vim.keymap.set('n', '<leader>C', '<Cmd>BufferCloseAllButCurrent<CR>', { desc = 'Close all buffers except current' })
+
+-- Cmd+K (toggle Gemini panel). In macOS terminals, <D-k> represents Command+K.
+-- Normal mode: uses current line as context. Visual mode: uses selected text.
+vim.keymap.set({ 'n', 'v' }, '<D-k>', function()
+  require('config.gemini').toggle_cmdk()
+end, { desc = 'Gemini: Ask with selection/line (toggle)' })

@@ -3,17 +3,20 @@ return {
     'datsfilipe/vesper.nvim',
     config = function()
       require('vesper').setup({
-        transparent = false, -- Boolean: Sets the background to transparent
+        transparent = false,
         italics = {
-          comments = true,   -- Boolean: Italicizes comments
-          keywords = true,   -- Boolean: Italicizes keywords
-          functions = true,  -- Boolean: Italicizes functions
-          strings = true,    -- Boolean: Italicizes strings
-          variables = true,  -- Boolean: Italicizes variables
+          comments = true,
+          keywords = true,
+          functions = true,
+          strings = true,
+          variables = true,
         },
-        overrides = {},      -- A dictionary of group names, can be a function returning a dictionary or a table.
-        palette_overrides = {}
+        overrides = {},
+        palette_overrides = {
+          white = "#a0a0a0",
+        }
       })
+      vim.cmd("colorscheme vesper")
     end
   },
 }

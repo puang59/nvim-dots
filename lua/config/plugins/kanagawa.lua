@@ -1,37 +1,96 @@
-return {
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      -- Default options:
-      require('kanagawa').setup({
-        compile = false,  -- enable compiling the colorscheme
-        undercurl = true, -- enable undercurls
-        commentStyle = { italic = true },
-        functionStyle = {},
-        keywordStyle = { italic = true },
-        statementStyle = { bold = true },
-        typeStyle = {},
-        transparent = true,   -- do not set background color
-        dimInactive = true,    -- dim inactive window `:h hl-NormalNC`
-        terminalColors = true, -- define vim.g.terminal_color_{0,17}
-        colors = {             -- add/modify theme and palette colors
-          palette = {},
-          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-        },
-        overrides = function(colors) -- add/modify highlights
-          return {
-            LineNr = { bg = "none" },
-            CursorLineNr = { bg = "none", fg = colors.theme.syn.fun },
-          }
-        end,
-        theme = "wave",    -- Load "wave" theme
-        background = {     -- map the value of 'background' option to a theme
-          dark = "dragon", -- try "dragon" !
-          light = "lotus"
-        },
-      })
+return {}
 
-      vim.cmd("colorscheme kanagawa")
-    end
-  }
-}
+-- return {
+--   {
+--     "rebelot/kanagawa.nvim",
+--     config = function()
+--       -- Default options:kana
+--       require('kanagawa').setup({
+--         compile = false,  -- enable compiling the colorscheme
+--         undercurl = true, -- enable undercurls
+--         commentStyle = { italic = true },
+--         functionStyle = {},
+--         keywordStyle = { italic = true },
+--         statementStyle = { bold = true },
+--         typeStyle = {},
+--         transparent = false,   -- do not set background color
+--         dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
+--         terminalColors = true, -- define vim.g.terminal_color_{0,17}
+--         colors = {             -- add/modify theme and palette colors
+--           palette = {},
+--           theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+--         },
+--         overrides = function(colors) -- add/modify highlights
+--           return {
+--             LineNr = { bg = "none" },
+--             CursorLineNr = { bg = "none", fg = colors.theme.syn.fun },
+--           }
+--         end,
+--         theme = "wave",    -- Load "wave" theme
+--         background = {     -- map the value of 'background' option to a theme
+--           dark = "dragon", -- try "dragon" !
+--           light = "lotus"
+--         },
+--       })
+--
+--       vim.cmd("colorscheme kanagawa")
+--     end
+--   }
+-- }
+--
+--
+-- return {
+--   {
+--     "rebelot/kanagawa.nvim",
+--     config = function()
+--       require("kanagawa").setup({
+--         compile = false,  -- enable compiling the colorscheme
+--         undercurl = true, -- enable undercurls
+--         transparent = false,
+--         commentStyle = { italic = true },
+--         functionStyle = {}, -- style for functions
+--         keywordStyle = { italic = true },
+--         statementStyle = { bold = true },
+--         typeStyle = {},        -- style for types
+--         dimInactive = false,   -- dim inactive window
+--         terminalColors = true, -- define vim.g.terminal_color_{0,17}
+--         theme = "wave",        -- Load "wave" theme when 'background' option is not set
+--         background = {         -- map the value of 'background' option to a theme
+--           dark = "wave",       -- try "dragon" !
+--           light = "lotus"
+--         },
+--         colors = {
+--           palette = {
+--             strongBlue = "#4da6ff",
+--             mildYellow = "#e6c76b",
+--           },
+--           theme = {
+--             wave = {
+--               ui = {
+--                 bg = "#000000", -- dark black background
+--                 bg_dim = "#050505",
+--               },
+--               syn = {
+--                 func = "#4da6ff", -- function colors
+--                 keyword = "#e6c76b",
+--               },
+--             },
+--           },
+--         },
+--         overrides = function(colors)
+--           local theme = colors.theme
+--           local palette = colors.palette
+--           return {
+--             Normal = { bg = "#000000" },
+--             NormalFloat = { bg = "#000000" },
+--             LineNr = { bg = "none", fg = palette.mildYellow },
+--             CursorLineNr = { bg = "none", fg = theme.syn.func },
+--             Visual = { bg = "#222222" },
+--             Search = { bg = "#333333", fg = palette.strongBlue },
+--           }
+--         end,
+--       })
+--       -- vim.cmd("colorscheme kanagawa")
+--     end,
+--   },
+-- }
